@@ -8,12 +8,15 @@ import {
   Box,
   Skeleton,
 } from "@chakra-ui/react";
-import { EstimateContext } from "../_contexts/contexts";
+import { EstimateContext, LanguageContext } from "../_contexts/contexts";
 
 const Stop = ({ id, inView }: { id: string; inView: boolean }) => {
-  const [{ en }, setStop] = useState<{ [key: string]: string | undefined }>({});
+  const [{ en, tc }, setStop] = useState<{ [key: string]: string | undefined }>(
+    {}
+  );
   const [isLoading, setIsLoading] = useState(false);
   const { isRefetch } = useContext(EstimateContext);
+  const { lang } = useContext(LanguageContext);
 
   useEffect(() => {
     const getStop = async (stopID: string) => {
@@ -62,7 +65,7 @@ const Stop = ({ id, inView }: { id: string; inView: boolean }) => {
           overflow="scroll"
           align="center"
         >
-          <Box maxHeight="48px">{en}</Box>
+          <Box maxHeight="48px">{lang == "en" ? en : tc}</Box>
         </Flex>
         <AccordionIcon flex="0.1" />
       </AccordionButton>

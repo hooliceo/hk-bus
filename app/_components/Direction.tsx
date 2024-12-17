@@ -1,5 +1,7 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { useContext } from "react";
+import { LanguageContext } from "../_contexts/contexts";
 
 const Direction = ({
   direction,
@@ -10,6 +12,8 @@ const Direction = ({
   isLoading: boolean;
   setDirection: (arg0: "outbound" | "inbound") => void;
 }) => {
+  const { lang } = useContext(LanguageContext);
+
   const handleClick = (dir: "outbound" | "inbound") => {
     setDirection(dir);
   };
@@ -30,7 +34,7 @@ const Direction = ({
         py={8}
         borderRadius="10px"
       >
-        <Box as="span">OUTBOUND</Box>
+        <Box as="span">{lang == "en" ? "OUTBOUND" : ""}</Box>
       </Button>
 
       <Button
@@ -47,7 +51,7 @@ const Direction = ({
         py={8}
         borderRadius="10px"
       >
-        <Box as="span">INBOUND</Box>
+        <Box as="span">{lang == "en" ? "INBOUND" : ""}</Box>
       </Button>
     </ButtonGroup>
   );

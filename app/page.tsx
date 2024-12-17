@@ -1,6 +1,12 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState, useReducer } from "react";
+import {
+  ChangeEvent,
+  useEffect,
+  useState,
+  useReducer,
+  useContext,
+} from "react";
 import { RepeatClockIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import { Box, Button, Flex, Input } from "@chakra-ui/react";
@@ -12,6 +18,7 @@ import {
   EstimateContext,
   DirectionContext,
   RouteContext,
+  LanguageContext,
 } from "./_contexts/contexts";
 
 export type StopType = { stop: string };
@@ -33,6 +40,8 @@ export default function Home() {
 
   const [state, dispatch] = useReducer(stopReducer, initialStopState);
   const { stops } = state;
+
+  const { lang, setLang } = useContext(LanguageContext);
 
   // To set state if localStorage history exists
   useEffect(() => {
@@ -85,6 +94,11 @@ export default function Home() {
     setRoute(ev.target.value);
   };
 
+  const handleSetLang = () => {
+    localStorage.setItem("lang", lang == "en" ? "tc" : "en");
+    setLang(lang == "en" ? "tc" : "en");
+  };
+
   const handleRefresh = () => {
     setIsRefetch(true);
   };
@@ -108,7 +122,7 @@ export default function Home() {
 
       <Input
         variant="flushed"
-        placeholder="Type here..."
+        placeholder={lang == "en" ? "Type here..." : "輸入路線..."}
         value={route}
         onChange={handleChange}
         w={["80%", null, "50%"]}
@@ -141,6 +155,20 @@ export default function Home() {
           </DirectionContext.Provider>
         </EstimateContext.Provider>
       </Box>
+
+      <Button
+        variant="ghost"
+        onClick={handleSetLang}
+        isDisabled={isLoading}
+        _hover={{ bg: "transparent", opacity: 0.5 }}
+        position="fixed"
+        top="20px"
+        right="20px"
+        color="#fff"
+        fontSize="24px"
+      >
+        {lang == "en" ? "中" : "English"}
+      </Button>
 
       <Button
         variant="ghost"
