@@ -47,7 +47,7 @@ const Favorites = ({
               variant="solid"
               colorScheme="whiteAlpha"
               key={entry}
-              size={["sm", "lg"]}
+              size="lg"
               cursor="pointer"
               onClick={() => handleClick(entry)}
             >

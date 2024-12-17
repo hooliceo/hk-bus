@@ -1,16 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   AccordionButton,
   AccordionIcon,
-  Box,
+  Flex,
   Skeleton,
 } from "@chakra-ui/react";
+import { EstimateContext } from "../_contexts/contexts";
 
 const Stop = ({ id, inView }: { id: string; inView: boolean }) => {
   const [{ en }, setStop] = useState<{ [key: string]: string | undefined }>({});
   const [isLoading, setIsLoading] = useState(false);
+  const { isRefetch } = useContext(EstimateContext);
 
   useEffect(() => {
     const getStop = async (stopID: string) => {
@@ -36,18 +38,31 @@ const Stop = ({ id, inView }: { id: string; inView: boolean }) => {
     if (inView) getStop(id);
   }, [id, inView]);
 
+  useEffect(() => {
+    if (isRefetch) setIsLoading(true);
+    else setIsLoading(false);
+  }, [isRefetch]);
+
   return (
-    <Skeleton isLoaded={!isLoading} startColor="#0282c7" endColor="#075985">
+    <Skeleton isLoaded={!isLoading} startColor="#27272a" endColor="#3f3f46">
       <AccordionButton
-        bg="#0282c7"
-        _expanded={{ bg: "#036aa1" }}
-        _hover={{ bg: "#075985" }}
+        bg="#27272a"
+        _expanded={{ bg: "#3f3f46" }}
+        _hover={{ bg: "#3f3f46" }}
         className="cursor-pointer"
         p={4}
+        borderRadius="10px"
       >
-        <Box as="span" flex="0.9" textAlign="left" h="48px" overflow="scroll">
+        <Flex
+          as="span"
+          flex="0.9"
+          textAlign="left"
+          h="48px"
+          overflow="scroll"
+          align="center"
+        >
           {en}
-        </Box>
+        </Flex>
         <AccordionIcon flex="0.1" />
       </AccordionButton>
     </Skeleton>

@@ -28,6 +28,7 @@ const Direction = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         py={8}
+        borderRadius="10px"
       >
         <Box as="span">OUTBOUND</Box>
       </Button>
@@ -44,6 +45,7 @@ const Direction = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         py={8}
+        borderRadius="10px"
       >
         <Box as="span">INBOUND</Box>
       </Button>

@@ -23,4 +23,8 @@ bun dev
    - May have to persist storage
 5. ~~Add refresh button~~
 6. Fix inconsistent reveal of stops
-7. Add KMB
+7. Add chinese support
+
+## Limitations
+
+- Cannot collapse accordion button on changing direction due to chakra ui
