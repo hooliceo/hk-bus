@@ -5,6 +5,7 @@ import {
   AccordionButton,
   AccordionIcon,
   Flex,
+  Box,
   Skeleton,
 } from "@chakra-ui/react";
 import { EstimateContext } from "../_contexts/contexts";
@@ -61,7 +62,7 @@ const Stop = ({ id, inView }: { id: string; inView: boolean }) => {
           overflow="scroll"
           align="center"
         >
-          {en}
+          <Box maxHeight="48px">{en}</Box>
         </Flex>
         <AccordionIcon flex="0.1" />
       </AccordionButton>
